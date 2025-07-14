@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 
-[Authorize]
 public class ChatHub : Hub
 {
     private static ConcurrentDictionary<string, string> ConnectedUsers = new();
