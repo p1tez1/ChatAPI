@@ -17,15 +17,7 @@ namespace ChatAPI.Fetures.Auth.Login
         {
             var token = _jwtService.GenerateToken(request.UserName);
 
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("jwt_token", token, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTimeOffset.UtcNow.AddHours(1)
-            });
-
-            return Task.FromResult(Results.Ok(token));
+            return Task.FromResult(Results.Ok(new { token = token }));
         }
     }
 }

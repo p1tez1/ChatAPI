@@ -28,22 +28,18 @@ public static class JWTShem
             {
                 OnMessageReceived = context =>
                 {
-                    var token = context.Request.Cookies["jwt_token"];
-                    if (!string.IsNullOrEmpty(token))
-                    {
-                        context.Token = token;
-                    }
-
                     var accessToken = context.Request.Query["access_token"];
+
                     var path = context.HttpContext.Request.Path;
-                    if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chatHub"))
+                    if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chathub"))
                     {
                         context.Token = accessToken;
                     }
+
                     return Task.CompletedTask;
                 }
-            };
-        });
+                };
+            });
 
         services.AddAuthorization();
 
